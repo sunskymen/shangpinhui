@@ -1,28 +1,28 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <MyHeader></MyHeader>
+    <!-- 路由组件出口 -->
+    <router-view></router-view>
+    <!-- 登录和注册时不显示底部 -->
+    <MyFooter v-show="$route.meta.show"></MyFooter>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MyHeader from './components/Header/MyHeader.vue';
+import MyFooter from './components/Footer/MyFooter.vue';
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MyHeader,
+    MyFooter
+  },
+  mounted() {
+    // 组件挂载完毕,请求数据(在跟组件中只会请求一次)
+    this.$store.dispatch('categoryList')
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
